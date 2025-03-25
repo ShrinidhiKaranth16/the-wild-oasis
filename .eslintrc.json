@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": "warn", // Show warning for unused variables
+    "eqeqeq": "error",
+    "curly": "error",
+    "semi": ["error", "always"],
+    "no-console": "warn",
+    "prefer-const": "error",
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "max-len": ["warn", { "code": 80 }],
+    "no-duplicate-imports": "error",
+    "no-undef": "error",
+    "no-unused-expressions": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
+}
