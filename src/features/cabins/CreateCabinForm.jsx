@@ -23,9 +23,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
-    console.log(data);
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log(image);
     isEditSession
       ? editCabin(
           { newCabinData: { ...data, image }, id: editId },
@@ -78,7 +76,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+      <FormRow label="Regular price" error={errors?.regularPrice?.message}>    
         <Input
           type="number"
           id="regularPrice"

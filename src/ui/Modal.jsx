@@ -1,4 +1,4 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import { cloneElement, createContext, useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -66,7 +66,7 @@ function Modal({ children }) {
   );
 }
 
-function Open({ opens: openName, children }) {
+function Open({ opens: openName, children }) { 
   const { open } = useContext(ModalContext);
   return cloneElement(children, { onClick: () => open(openName) });
 }
@@ -75,6 +75,7 @@ function Window({ children, name }) {
 
   const ref = useOutsideClick(close);
   
+
   if (name !== openName) return null;
 
   return createPortal(

@@ -12,8 +12,6 @@ if(!bookings) return <Empty resource="bookings" />;
 if (isLoading) return <Spinner />;
 
 
-
-console.log(bookings);
   return (
     <Menus>
       <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">

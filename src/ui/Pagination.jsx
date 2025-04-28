@@ -55,7 +55,7 @@ import { PAGE_SIZE } from "../utils/constants";
 
 
 export default function Pagination({ count }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();         
 
   const currentPage = !searchParams.get("page")
     ? 1

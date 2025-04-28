@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-
+import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { useCreateCabin } from "./useCreateCabin";
 
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import Modal from "../../ui/Modal";
 
 const Img = styled.img`
   display: block;
@@ -37,6 +39,7 @@ const Discount = styled.div`
 function CabinRow({ cabin }) {
   const { isDeleteing, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
+
   const {
     id: cabinId,
     name,
@@ -57,6 +60,8 @@ function CabinRow({ cabin }) {
       description,
     });
   }
+  
+
 
   return (
     <Table.Row>
@@ -67,14 +72,24 @@ function CabinRow({ cabin }) {
       <Discount role="cell">{ discount>0 ? formatCurrency(discount) : "-"}</Discount>
       <div>
 
+        <Modal>
         <Menus.Menu>
           <Menus.Toggle id={cabinId} />
           <Menus.List id={cabinId}>
-            <Menus.Button> Duplicate</Menus.Button>
-            <Menus.Button> Edit</Menus.Button>
-            <Menus.Button> Delete</Menus.Button>
+            <Menus.Button onClick={handleDuplicate} icon = {<HiSquare2Stack/>}> Duplicate</Menus.Button>   
+            <Modal.Open opens="edit">
+          <Menus.Button icon = {<HiPencil/>}> Edit</Menus.Button>
+          </Modal.Open>
+            <Menus.Button  icon = {<HiTrash/>}onClick={() => deleteCabin(cabinId)}> Delete</Menus.Button>
           </Menus.List>
         </Menus.Menu>
+
+          <Modal.Window name="edit">
+            <CreateCabinForm cabinToEdit={cabin} />
+          </Modal.Window>
+        </Modal>
+
+
       </div>
     </Table.Row>
   );
