@@ -13,6 +13,7 @@ import { useSettings } from "../settings/useSettings";
 import { useCreateBookings } from "./useCreateBookings";
 import { useBookingContext } from "./useBookingContext";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const StyledError = styled.span`
   color: var(--color-red-500, red);
@@ -86,6 +87,10 @@ export default function BookingNewForm() {
   };
 
   const onSubmit1 = async (data) => {
+    if (data.checkInDate > data.checkOutDate) {
+      toast.error("Check-in date cannot be after check-out date.");
+      return;
+    }
     setBookingData({
       name: data.name,
       email: data.email,
@@ -95,7 +100,8 @@ export default function BookingNewForm() {
       checkInDate: data.checkInDate,
       checkOutDate: data.checkOutDate,
     });
-  
+    
+
     const searchParams = new URLSearchParams();
     searchParams.set("checkIn", data.checkInDate);
     searchParams.set("checkOut", data.checkOutDate);
