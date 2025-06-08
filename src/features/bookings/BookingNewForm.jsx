@@ -88,10 +88,10 @@ export default function BookingNewForm() {
 
   const onSubmit1 = async (data) => {
     if (data.checkInDate > data.checkOutDate) {
-      toast.error("Check-in date cannot be after check-out date.");
+      toast.error("Check-in date cannot be after check-out date");
       return;
     }
-    setBookingData({
+    const updatedBookingData = {
       name: data.name,
       email: data.email,
       nationality: data.nationality,
@@ -99,14 +99,23 @@ export default function BookingNewForm() {
       numberOfGuests: data.numberOfGuests,
       checkInDate: data.checkInDate,
       checkOutDate: data.checkOutDate,
-    });
-    
-
+    };
+  
+    // Update state (for later UI use)
+    setBookingData(updatedBookingData);
+  
+    // Store in localStorage immediately
+    localStorage.setItem("bookingData", JSON.stringify(updatedBookingData));
+  
+    // Prepare URL and navigate
     const searchParams = new URLSearchParams();
     searchParams.set("checkIn", data.checkInDate);
     searchParams.set("checkOut", data.checkOutDate);
+  
+    // Clear any stale data
     localStorage.removeItem("selectedCabinsForCheckout");
-    localStorage.setItem("bookingData", JSON.stringify(bookingData));
+  
+    // Navigate to next step
     navigate(`/bookings/available-cabins?${searchParams.toString()}`);
   };
   
