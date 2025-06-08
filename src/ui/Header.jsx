@@ -15,6 +15,7 @@ const StyledHeader = styled.header`
 
 function Header() {
   return <StyledHeader>
+    <BookingNew />
     <UserAvatar />
     <HeaderMenu />
   </StyledHeader>;

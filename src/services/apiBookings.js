@@ -1,7 +1,23 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 import { PAGE_SIZE } from "../utils/constants";
+
+export async function getAllBookings() {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*, cabins(name), guests(fullName,email)")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+  return data;
+  }
+  
 export async function getBookings({ filter, sortBy, page }) {
+  console.log("getBookings", filter, sortBy, page);
+
   let query = supabase
     .from("bookings")
     .select("*,cabins(name),guests(fullName,email)",
@@ -126,3 +142,18 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+
+export async function createBooking(booking) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .insert([booking])
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be created");
+  }
+  return data;
+}
+

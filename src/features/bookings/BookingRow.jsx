@@ -63,7 +63,10 @@ function BookingRow({
 
   return (
     <Table.Row>
+      <Stacked>
       <Cabin>{cabinName}</Cabin>
+        <span>{bookingId}</span>
+      </Stacked>
 
       <Stacked>
         <span>{guestName}</span>
