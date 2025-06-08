@@ -253,7 +253,7 @@ export default function CartPage() {
               <span>${calculateFinalTotal()}</span>
             </TotalRow>
 
-            <CheckoutButton onClick={handleCheckout}>
+            <CheckoutButton disabled={true} onClick={handleCheckout}>
               Proceed to Checkout
             </CheckoutButton>
           </CartSummary>
